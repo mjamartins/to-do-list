@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+
+ <style>
+        body {
+         font-family: Arial, sans-serif; 
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         margin: 0;
+         background-color: #f0f0f0;
+      }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+         }
+
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button :hover{
+            background: #218838;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li button {
+            background: #dc3545;
+            padding: 5px 10px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;    
+         }
+
+        li button:hover {
+            background: #c82333;
+         }
+        </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Tarefas</h1>
+        <input type="text" id="new-task" placeholder="Adicione uma nova tarefa">
+        <button id="add-task-btn">Adicionar</button>
+        <ul id="task-list"></ul>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const taskInput = document.getElementById("new-task");
+            const addTaskBtn = document.getElementById("add-task-btn");
+            const taskList = document.getElementById("task-list");  
+
+            addTaskBtn.addEventListener("click", addTask);
+            taskList.addEventListener("click", removeTask);
+
+            function addTask() {
+                const taskText = taskInput.value.trim();
+                if (taskText !=="") {
+                    const li = document.createElement("li");
+                    li.innerHTML = `${taskText} <button>Remover</button>`;
+                    taskList.appendChild(li);
+                    taskInput.value = "";
+                    taskInput.focus();
+            }
+        }
+
+        function removeTask(e) {
+            if (e.target.tagName === "BUTTON") {
+                e.target.parentElement.remove();
+            }
+
+        }   
+    });
+
+    </script>    
+</body>
+</html>
+
+
